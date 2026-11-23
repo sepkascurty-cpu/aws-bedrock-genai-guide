@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1020" viewBox="0 0 1200 1020" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#527FFF"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="1200" height="1020" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="34" font-size="22" font-weight="bold" fill="#232F3E" text-anchor="middle">Amazon Bedrock — Serverless Generative AI Architecture</text>
+  <text x="600" y="58" font-size="14" fill="#555555" text-anchor="middle">RAG with Knowledge Bases · Guardrails on every call · Lambda orchestration</text>
+
+  <!-- Users -->
+  <g>
+    <rect x="60" y="96" width="70" height="46" rx="4" fill="none" stroke="#232F3E" stroke-width="2"/>
+    <rect x="70" y="106" width="50" height="26" fill="none" stroke="#232F3E" stroke-width="1.5"/>
+    <line x1="80" y1="142" x2="120" y2="142" stroke="#232F3E" stroke-width="2"/>
+    <text x="95" y="88" font-size="13" fill="#232F3E" text-anchor="middle">Users</text>
+    <text x="95" y="164" font-size="12" fill="#232F3E" text-anchor="middle">chat / web app</text>
+  </g>
+
+  <!-- Arrow: Users -> Route 53 -->
+  <line x1="132" y1="119" x2="198" y2="119" stroke="#444444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="165" y="108" font-size="11" fill="#555555" text-anchor="middle">DNS query</text>
+
+  <!-- Route 53 -->
+  <g>
+    <rect x="200" y="91" width="56" height="56" fill="#8C4FFF"/>
+    <text x="228" y="116" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">53</text>
+    <text x="228" y="134" font-size="11" fill="#ffffff" text-anchor="middle">Route 53</text>
+    <text x="228" y="164" font-size="13" fill="#232F3E" text-anchor="middle">Amazon Route 53</text>
+    <text x="228" y="181" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">DNS — app.example.com</text>
+  </g>
+
+  <!-- Arrow: Route 53 -> CloudFront -->
+  <line x1="258" y1="119" x2="324" y2="119" stroke="#444444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="291" y="108" font-size="11" fill="#555555" text-anchor="middle">HTTPS</text>
+
+  <!-- CloudFront -->
+  <g>
+    <rect x="326" y="91" width="56" height="56" fill="#8C4FFF"/>
+    <text x="354" y="125" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">CF</text>
+    <text x="354" y="164" font-size="13" fill="#232F3E" text-anchor="middle">Amazon CloudFront</text>
+    <text x="354" y="181" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">global edge · TLS · cache</text>
+  </g>
+
+  <!-- Arrow: CloudFront -> WAF -->
+  <line x1="384" y1="119" x2="450" y2="119" stroke="#444444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="417" y="108" font-size="11" fill="#555555" text-anchor="middle">filtered</text>
+
+  <!-- WAF / Shield -->
+  <g>
+    <rect x="452" y="91" width="56" height="56" fill="#D13239"/>
+    <text x="480" y="125" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">WAF</text>
+    <text x="480" y="164" font-size="13" fill="#232F3E" text-anchor="middle">AWS WAF + Shield</text>
+    <text x="480" y="181" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">blocks bots &amp; abuse</text>
+  </g>
+
+  <!-- Arrow: WAF -> ALB -->
+  <line x1="510" y1="119" x2="576" y2="119" stroke="#527FFF" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <text x="543" y="108" font-size="11" fill="#527FFF" text-anchor="middle">HTTPS</text>
+
+  <!-- ALB -->
+  <g>
+    <rect x="578" y="91" width="56" height="56" fill="#8C4FFF"/>
+    <text x="606" y="125" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">ALB</text>
+    <text x="606" y="164" font-size="13" fill="#232F3E" text-anchor="middle">Application LB</text>
+    <text x="606" y="181" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">routes /api/* to Lambda</text>
+  </g>
+
+  <!-- Arrow: ALB -> VPC -->
+  <line x1="634" y1="119" x2="700" y2="119" stroke="#527FFF" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <text x="667" y="108" font-size="11" fill="#527FFF" text-anchor="middle">invoke</text>
+
+  <!-- VPC box -->
+  <g>
+    <rect x="60" y="230" width="1080" height="640" rx="8" fill="#EAF5EA" stroke="#1B660F" stroke-width="2" stroke-dasharray="8 5"/>
+    <text x="90" y="258" font-size="15" font-weight="bold" fill="#1B660F">VPC — app-vpc (10.0.0.0/16) · region us-east-1</text>
+
+    <!-- Public subnet -->
+    <rect x="90" y="278" width="1020" height="150" rx="6" fill="#FFFFFF" stroke="#1B660F" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="110" y="302" font-size="13" font-weight="bold" fill="#1B660F">Public subnet — 10.0.1.0/24</text>
+    <text x="110" y="322" font-size="12" fill="#555555">NAT Gateway · internet egress for Lambda (Bedrock API calls)</text>
+    <g>
+      <rect x="120" y="340" width="56" height="56" fill="#FF9900"/>
+      <text x="148" y="374" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">NAT</text>
+      <text x="148" y="412" font-size="13" fill="#232F3E" text-anchor="middle">NAT Gateway</text>
+    </g>
+    <text x="230" y="368" font-size="12" fill="#555555">Lambda reaches Bedrock &amp; the internet through NAT — no public IPs on functions.</text>
+
+    <!-- App tier AZ-a -->
+    <rect x="90" y="452" width="490" height="180" rx="6" fill="#FFFFFF" stroke="#527FFF" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="110" y="476" font-size="13" font-weight="bold" fill="#232F3E">Availability Zone A — us-east-1a · private app subnet 10.0.10.0/24</text>
+    <g>
+      <rect x="120" y="496" width="56" height="56" fill="#FF9900"/>
+      <text x="148" y="527" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">λ</text>
+      <text x="148" y="570" font-size="13" fill="#232F3E" text-anchor="middle">Lambda — API</text>
+      <text x="148" y="587" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">chat handler · sessions</text>
+    </g>
+    <g>
+      <rect x="300" y="496" width="56" height="56" fill="#FF9900"/>
+      <text x="328" y="527" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">λ</text>
+      <text x="328" y="570" font-size="13" fill="#232F3E" text-anchor="middle">Lambda — RAG</text>
+      <text x="328" y="587" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">retrieve top-k chunks</text>
+    </g>
+    <text x="470" y="527" font-size="12" fill="#555555">VPC endpoints for Bedrock,</text>
+    <text x="470" y="545" font-size="12" fill="#555555">DynamoDB &amp; S3 (no NAT needed)</text>
+
+    <!-- App tier AZ-b -->
+    <rect x="620" y="452" width="490" height="180" rx="6" fill="#FFFFFF" stroke="#527FFF" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="640" y="476" font-size="13" font-weight="bold" fill="#232F3E">Availability Zone B — us-east-1b · private app subnet 10.0.11.0/24</text>
+    <g>
+      <rect x="650" y="496" width="56" height="56" fill="#FF9900"/>
+      <text x="678" y="527" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">λ</text>
+      <text x="678" y="570" font-size="13" fill="#232F3E" text-anchor="middle">Lambda — API</text>
+      <text x="678" y="587" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">chat handler · sessions</text>
+    </g>
+    <g>
+      <rect x="830" y="496" width="56" height="56" fill="#FF9900"/>
+      <text x="858" y="527" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">λ</text>
+      <text x="858" y="570" font-size="13" fill="#232F3E" text-anchor="middle">Lambda — Agents</text>
+      <text x="858" y="587" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">action groups · tools</text>
+    </g>
+    <text x="990" y="527" font-size="12" fill="#555555">same code,</text>
+    <text x="990" y="545" font-size="12" fill="#555555">both AZs</text>
+
+    <!-- DB tier -->
+    <rect x="90" y="656" width="1020" height="180" rx="6" fill="#FFFFFF" stroke="#2E6FDB" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="110" y="680" font-size="13" font-weight="bold" fill="#2E6FDB">Data tier — private db subnet 10.0.20.0/24 · no internet route</text>
+    <g>
+      <rect x="120" y="700" width="56" height="56" fill="#2E6FDB"/>
+      <text x="148" y="734" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">DDB</text>
+      <text x="148" y="774" font-size="13" fill="#232F3E" text-anchor="middle">DynamoDB</text>
+      <text x="148" y="791" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">chat sessions &amp; history</text>
+    </g>
+    <g>
+      <rect x="330" y="700" width="56" height="56" fill="#2E6FDB"/>
+      <text x="358" y="734" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">OS</text>
+      <text x="358" y="774" font-size="13" fill="#232F3E" text-anchor="middle">OpenSearch Serverless</text>
+      <text x="358" y="791" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">vector index — KB chunks</text>
+    </g>
+    <g>
+      <rect x="560" y="700" width="56" height="56" fill="#3F9E4D"/>
+      <text x="588" y="734" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">S3</text>
+      <text x="588" y="774" font-size="13" fill="#232F3E" text-anchor="middle">Amazon S3</text>
+      <text x="588" y="791" font-size="12" font-style="italic" fill="#555555" text-anchor="middle">source documents for KB</text>
+    </g>
+    <text x="700" y="728" font-size="12" fill="#555555">Knowledge Base ingests S3 docs →</text>
+    <text x="700" y="746" font-size="12" fill="#555555">embeddings → OpenSearch vectors.</text>
+    <text x="700" y="764" font-size="12" fill="#555555">Retrieval returns top-k chunks</text>
+    <text x="700" y="782" font-size="12" fill="#555555">with citations to the model.</text>
+  </g>
+
+  <!-- Arrow: ALB down into VPC app tier -->
+  <line x1="606" y1="149" x2="606" y2="200" stroke="#527FFF" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <text x="616" y="178" font-size="11" fill="#527FFF">HTTPS → Lambda</text>
+
+  <!-- Bedrock box (outside VPC, managed service) -->
+  <g>
+    <rect x="60" y="890" width="700" height="110" rx="8" fill="#FFF4E0" stroke="#FF9900" stroke-width="2"/>
+    <text x="90" y="916" font-size="15" font-weight="bold" fill="#232F3E">Amazon Bedrock — fully managed, outside the VPC (via VPC endpoint)</text>
+    <g>
+      <rect x="90" y="928" width="56" height="56" fill="#FF9900"/>
+      <text x="118" y="962" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">FM</text>
+      <text x="118" y="1002" font-size="11" fill="#232F3E" text-anchor="middle" transform="translate(0,-6)">Foundation models</text>
+    </g>
+    <text x="170" y="946" font-size="12" fill="#555555">Claude · Titan · Llama · Mistral — one Converse API</text>
+    <text x="170" y="966" font-size="12" fill="#555555">Guardrails filter prompt in, answer out</text>
+    <g>
+      <rect x="470" y="928" width="56" height="56" fill="#8C4FFF"/>
+      <text x="498" y="962" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">KB</text>
+    </g>
+    <text x="550" y="946" font-size="12" fill="#555555">Knowledge Bases — managed RAG</text>
+    <text x="550" y="966" font-size="12" fill="#555555">Agents — multi-step tool use</text>
+  </g>
+
+  <!-- CloudWatch -->
+  <g>
+    <rect x="800" y="890" width="340" height="110" rx="8" fill="#EAF1FF" stroke="#527FFF" stroke-width="2"/>
+    <text x="820" y="916" font-size="15" font-weight="bold" fill="#232F3E">Amazon CloudWatch</text>
+    <text x="820" y="940" font-size="12" fill="#555555">Invocations, token counts, latency,</text>
+    <text x="820" y="958" font-size="12" fill="#555555">Guardrail interventions, cost alarms</text>
+    <text x="820" y="976" font-size="12" fill="#555555">per model — input vs output tokens</text>
+  </g>
+
+  <!-- Flow arrows: Lambda -> Bedrock -->
+  <line x1="335" y1="640" x2="335" y2="890" stroke="#FF9900" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+  <text x="345" y="760" font-size="11" fill="#FF9900">Converse API + Guardrails</text>
+  <!-- Flow arrows: RAG Lambda -> OpenSearch -->
+  <line x1="328" y1="592" x2="328" y2="690" stroke="#527FFF" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="338" y="646" font-size="11" fill="#527FFF">retrieve top-k</text>
+
+  <!-- Legend -->
+  <text x="60" y="1014" font-size="11" fill="#888888">Orange = compute · Blue = database / vectors · Green = storage / VPC · Purple = networking / edge · Red = WAF / security — classic AWS reference-architecture style</text>
+</svg>
