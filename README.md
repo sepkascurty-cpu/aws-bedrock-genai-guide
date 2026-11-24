@@ -9,6 +9,10 @@
 
 ---
 
+## 🌍 In plain words — what is this, really?
+
+Imagine a food court instead of building your own restaurant kitchen: several top chefs from different famous restaurants each run a stall, you walk up, order in plain language, pay per dish, and never buy ovens, hire the chefs full-time, or clean up afterwards. Bedrock is that food court for large AI models — models from Anthropic, Meta, Amazon, and others sit behind one counter (one API), and you simply pick which chef suits the dish, from answering questions to writing text or generating images. If you want the chef to cook using your family's recipe book instead of general knowledge, you hand over the book: that is a Knowledge Base, where your documents are indexed so answers are grounded in your own data with citations, a technique called RAG. Guardrails are the food court's house rules, checked before and after cooking — no banned ingredients, no personal data leaking onto the plate. Agents go one step further: a waiter who can take your order, check the stockroom, and call other services before bringing the final answer. You pay per token, roughly per bite, which is why this guide spends real time on cost before you scale.
+
 ## What Bedrock actually gives you
 
 | Piece | What it does | Why it matters |
@@ -106,12 +110,6 @@ python bedrock_demo.py --estimate --input-tokens 1000000 --output-tokens 200000
 - [ ] Token usage and cost alarms per model (input vs output separately).
 - [ ] Prompt templates versioned — a changed system prompt is a deployment, treat it like one.
 - [ ] Fallback model configured — if your primary model throttles, degrade gracefully.
-
----
-
-## Quiz teaser
-
-Can you explain why RAG beats fine-tuning for a company whose documents change weekly — and what Guardrails actually filter? Test yourself in [quiz.md](quiz.md) — 5 questions, answers collapsed.
 
 ---
 
